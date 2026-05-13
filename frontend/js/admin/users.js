@@ -1,121 +1,73 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const userForm = document.getElementById('user-form');
-    const usersTableBody = document.getElementById('users-table-body');
-    const dialogTitle = document.getElementById('dialog-title');
-    const userIdInput = document.getElementById('user-id');
+import { getAllUsers, deleteUser } from "../api/dashboard/user.js";
 
-    // Stats elements
-    const totalUsersEl = document.getElementById('total-users');
-    const adminUsersEl = document.getElementById('admin-users');
-    const customerUsersEl = document.getElementById('customer-users');
+document.addEventListener("DOMContentLoaded", async () => {
+  const usersTableBody = document.getElementById("users-table-body");
 
-    // Mock data for initial display
-    let users = [
-        { id: 1, name: 'Ammar Yasser', email: 'ammaryasser.online@gmail.com', role: 'Admin' },
-        { id: 2, name: 'John Doe', email: 'john@example.com', role: 'Customer' },
-        { id: 3, name: 'Jane Smith', email: 'jane@example.com', role: 'Customer' },
-        { id: 4, name: 'Admin User', email: 'admin@vendly.com', role: 'Admin' }
-    ];
+  // Stats elements
+  const totalUsersEl = document.getElementById("total-users");
+  const adminUsersEl = document.getElementById("admin-users");
+  const customerUsersEl = document.getElementById("customer-users");
 
-    function renderUsers() {
-        usersTableBody.innerHTML = '';
-        let adminCount = 0;
-        let customerCount = 0;
+  let users = [];
 
-        users.forEach(user => {
-            if (user.role === 'Admin') adminCount++;
-            else customerCount++;
+  const renderUsers = () => {
+    usersTableBody.innerHTML = "";
+    let adminCount = 0;
+    let customerCount = 0;
 
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td><span class="role-badge role-${user.role.toLowerCase()}">${user.role}</span></td>
-                <td>
-                    <button class="btn-edit" data-id="${user.id}">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button class="btn-delete" data-id="${user.id}">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </td>
-            `;
-            usersTableBody.appendChild(row);
-        });
+    users.forEach((user) => {
+      // Role is an enum: 'admin', 'customer'
+      const roleStr = user.role === "admin" ? "Admin" : "Customer";
+      
+      if (user.role === "admin") adminCount++;
+      else customerCount++;
 
-        // Update stats
-        totalUsersEl.textContent = users.length;
-        adminUsersEl.textContent = adminCount;
-        customerUsersEl.textContent = customerCount;
-    }
-
-    // Initial render
-    renderUsers();
-
-    // Handle form submission (Only for Editing now)
-    userForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        if (!userIdInput.value) return; // Safety check: only allow if editing
-
-        const formData = new FormData(userForm);
-        const userData = {
-            id: parseInt(userIdInput.value),
-            name: formData.get('name'),
-            email: formData.get('email'),
-            role: formData.get('role')
-        };
-
-        // Update existing user
-        const index = users.findIndex(u => u.id === userData.id);
-        if (index !== -1) {
-            users[index] = userData;
-        }
-
-        renderUsers();
-        closeUserDialog();
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td><span class="role-badge role-${user.role}">${roleStr}</span></td>
+        <td>
+          <button class="btn-delete" data-id="${user.id}">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      `;
+      usersTableBody.appendChild(row);
     });
 
-    // Edit functionality
-    usersTableBody.addEventListener('click', (e) => {
-        const editBtn = e.target.closest('.btn-edit');
-        if (editBtn) {
-            const id = parseInt(editBtn.dataset.id);
-            const user = users.find(u => u.id === id);
-            if (user) {
-                openEditDialog(user);
-            }
-        }
+    // Update stats
+    totalUsersEl.textContent = users.length;
+    adminUsersEl.textContent = adminCount;
+    customerUsersEl.textContent = customerCount;
+  };
 
-        const deleteBtn = e.target.closest('.btn-delete');
-        if (deleteBtn) {
-            const id = parseInt(deleteBtn.dataset.id);
-            if (confirm('Are you sure you want to delete this user?')) {
-                users = users.filter(u => u.id !== id);
-                renderUsers();
-            }
-        }
-    });
-
-    function openEditDialog(user) {
-        dialogTitle.textContent = 'Edit User';
-        userIdInput.value = user.id;
-        userForm.name.value = user.name;
-        userForm.email.value = user.email;
-        userForm.role.value = user.role;
-        
-        document.getElementById('user-form-overlay').classList.add('active');
+  const fetchAndRenderUsers = async () => {
+    try {
+      users = await getAllUsers();
+      renderUsers();
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+      usersTableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: red;">Failed to load users.</td></tr>`;
     }
+  };
 
-    function closeUserDialog() {
-        userForm.reset();
-        userIdInput.value = '';
-        dialogTitle.textContent = 'Edit User'; // Default to Edit User as Add is gone
-        document.getElementById('user-form-overlay').classList.remove('active');
+  await fetchAndRenderUsers();
+
+  // Delete functionality
+  usersTableBody.addEventListener("click", async (e) => {
+    const deleteBtn = e.target.closest(".btn-delete");
+    if (deleteBtn) {
+      const id = parseInt(deleteBtn.dataset.id);
+      if (confirm("Are you sure you want to delete this user?")) {
+        try {
+          await deleteUser(id);
+          users = users.filter((u) => u.id !== id);
+          renderUsers();
+        } catch (error) {
+          alert("Failed to delete user: " + error.message);
+        }
+      }
     }
-
-    // Reset form when clicking close button
-    document.getElementById('user-form-close').addEventListener('click', () => {
-        setTimeout(closeUserDialog, 300); // Wait for transition
-    });
+  });
 });

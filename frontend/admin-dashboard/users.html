@@ -123,49 +123,6 @@
           </table>
         </section>
       </main>
-
-      <!-- User Form Overlay (Dialog) -->
-      <div class="dialog-overlay" id="user-form-overlay">
-        <div class="dialog-container">
-          <div class="dialog-header">
-            <h2 id="dialog-title">Add User</h2>
-            <button class="btn-close" id="user-form-close">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-          <form class="user-form" id="user-form">
-            <input type="hidden" id="user-id" name="id" />
-            <div class="input-box">
-              <label class="form-label">Full Name</label>
-              <input
-                class="form-input"
-                type="text"
-                name="name"
-                placeholder="e.g. John Doe"
-                required
-              />
-            </div>
-            <div class="input-box">
-              <label class="form-label">Email Address</label>
-              <input
-                class="form-input"
-                type="email"
-                name="email"
-                placeholder="e.g. john@example.com"
-                required
-              />
-            </div>
-            <div class="input-box">
-              <label class="form-label">Role</label>
-              <select class="form-input" name="role" required>
-                <option value="Customer">Customer</option>
-                <option value="Admin">Admin</option>
-              </select>
-            </div>
-            <button type="submit" class="btn-submit">Save User</button>
-          </form>
-        </div>
-      </div>
     </div>
     <script type="module" src="/js/utils/auth.js"></script>
     <script type="module" src="/js/admin/users.js"></script>
