@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pages/dashboard.css" />
+    <!-- Font Awesome Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="template-area">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li class="active">
+              <a href="./index.html">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="./menus.html">
+                <i class="fa-solid fa-book"></i>
+                <span>Menus</span>
+              </a>
+            </li>
+            <li>
+              <a href="./products.html">
+                <i class="fa-solid fa-burger"></i>
+                <span>Products</span>
+              </a>
+            </li>
+            <li>
+              <a href="./orders.html">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Orders</span>
+              </a>
+            </li>
+            <li>
+              <a href="./users.html">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+              </a>
+            </li>
+          </ul>
+          <div class="account">
+            <div class="account-details">
+              <i class="fa-solid fa-user"></i>
+              <div class="account-info">
+                <h4 class="account-name">
+                  Ammar Yasser
+                  <button class="btn-logout" id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </button>
+                </h4>
+                <p class="account-email">ammaryasser.online@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </aside>
+      <!-- Main Content -->
+      <main class="main-content">
+        <section class="dashboard-section">
+          <div class="section-header">
+            <h2>Dashboard Overview</h2>
+            <div class="date-display" id="current-date"></div>
+          </div>
+          
+          <!-- KPIS -->
+          <div class="kpis">
+            <div class="kpi" id="kpi-revenue">
+              <div class="kpi-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+              <div class="kpi-data">
+                <h3>Total Revenue</h3>
+                <p class="value">$0.00</p>
+              </div>
+            </div>
+            <div class="kpi" id="kpi-orders">
+              <div class="kpi-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+              <div class="kpi-data">
+                <h3>Total Orders</h3>
+                <p class="value">0</p>
+              </div>
+            </div>
+            <div class="kpi" id="kpi-products">
+              <div class="kpi-icon"><i class="fa-solid fa-burger"></i></div>
+              <div class="kpi-data">
+                <h3>Products</h3>
+                <p class="value">0</p>
+              </div>
+            </div>
+            <div class="kpi" id="kpi-menus">
+              <div class="kpi-icon"><i class="fa-solid fa-book"></i></div>
+              <div class="kpi-data">
+                <h3>Menus</h3>
+                <p class="value">0</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Grid -->
+          <div class="charts-grid">
+            <div class="chart-container main-chart">
+              <h3>Revenue Overview</h3>
+              <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-container side-chart">
+              <h3>Orders Status</h3>
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="activity-section">
+            <div class="table-card">
+              <h3>Recent Orders</h3>
+              <table class="table" id="recent-orders-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Data will be injected here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/utils/logout.js" type="module"></script>
+    <script src="../js/utils/auth.js" type="module"></script>
+    <script src="../js/admin/dashboard.js" type="module"></script>
+  </body>
+</html>

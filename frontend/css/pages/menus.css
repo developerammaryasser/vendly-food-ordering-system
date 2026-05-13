@@ -1,0 +1,56 @@
+form.menu-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menus-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-input-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  background: #fdfdfd;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.menu-input-row .input-box {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.btn-remove-row {
+  background-color: transparent;
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-remove-row:hover i {
+  color: #ff4d4d !important;
+}
+
+/* Custom Scrollbar for items container */
+.items-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.items-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.items-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}

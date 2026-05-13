@@ -1,0 +1,21 @@
+/* Product Form */
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+table th.th-image {
+  width: 80px !important;
+}
+table .image-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table .image-cell img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}

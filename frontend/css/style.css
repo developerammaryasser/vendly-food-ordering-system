@@ -1,0 +1,330 @@
+:root {
+  --primary-color: #f8833e;
+  --bg-color: #fafafa;
+  --border-color: #efefef;
+  --font-color: #1e1e1e;
+  --text-color: #333333;
+  --red-color: #dc3545;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--font-color);
+}
+p {
+  color: var(--text-color);
+}
+i {
+  color: var(--text-color);
+}
+body {
+  background-color: var(--bg-color);
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 4px 8px;
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+main {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+/* Header */
+.fixed-header {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 2px;
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.search-wrapper {
+  position: relative;
+  flex: 1 1 auto;
+  max-width: 400px;
+}
+.search-input {
+  width: 100%;
+  padding: 8px 32px 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-color);
+}
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #757575;
+}
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.link-icon {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.link-icon i {
+  font-size: 1rem;
+  color: #757575;
+}
+.btn-cart {
+  position: relative;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.btn-cart i {
+  font-size: 1rem;
+  color: #757575;
+}
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1px 3px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px;
+}
+.categories-nav {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  background-color: var(--bg-color);
+  padding: 8px;
+  border-radius: 8px;
+}
+.categories-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 12px;
+}
+.categories-nav ul li button {
+  background-color: #fff;
+  cursor: pointer;
+  padding: 10px;
+}
+.categories-nav ul li button.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+/* Products Section */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+/* Product Card */
+.product-card {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.product-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+}
+.product-category {
+  font-size: 0.9rem;
+  font-weight: 300;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  padding: 4px 8px;
+  display: inline-block;
+}
+.product-name {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+.product-description {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.product-price {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.product-card-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.add-to-cart {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+.quantity-btn {
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 0.7rem;
+}
+.quantity {
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+/* KPI's */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.kpi {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: start;
+}
+
+.table th {
+  background-color: #fff;
+}
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.table td button i {
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.btn-primary i {
+  color: white;
+}
+.btn-primary:hover {
+  opacity: 0.9;
+}
+.btn-secondary {
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px dashed var(--border-color);
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  background: #fff;
+  border-color: var(--primary-color);
+}
+.btn-submit {
+  width: 100%;
+  padding: 0.8rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.btn-submit:hover {
+  opacity: 0.9;
+}

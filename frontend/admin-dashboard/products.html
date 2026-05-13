@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pages/dashboard.css" />
+    <link rel="stylesheet" href="/css/shared/form.css" />
+    <link rel="stylesheet" href="/css/shared/dialog.css" />
+    <link rel="stylesheet" href="/css/pages/products.css" />
+
+    <!-- Font Awesome Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="template-area">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li>
+              <a href="./index.html">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="./menus.html">
+                <i class="fa-solid fa-book"></i>
+                <span>Menus</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="./products.html">
+                <i class="fa-solid fa-burger"></i>
+                <span>Products</span>
+              </a>
+            </li>
+            <li>
+              <a href="./orders.html">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Orders</span>
+              </a>
+            </li>
+            <li>
+              <a href="./users.html">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+              </a>
+            </li>
+          </ul>
+          <div class="account">
+            <div class="account-details">
+              <i class="fa-solid fa-user"></i>
+              <div class="account-info">
+                <h4 class="account-name">
+                  Ammar Yasser
+                  <button class="btn-logout" id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </button>
+                </h4>
+                <p class="account-email">ammaryasser.online@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </aside>
+      <!-- Main Content -->
+      <main class="main-content">
+        <section>
+          <div class="section-header">
+            <h2>Products</h2>
+            <!-- Add Product Button -->
+            <div>
+              <button class="btn-primary" id="btn-add-product">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add Product</span>
+              </button>
+            </div>
+          </div>
+          <!-- KPIS -->
+          <div class="kpis">
+            <div class="kpi">
+              <h3>Total Products</h3>
+              <p id="total-products">0</p>
+            </div>
+            <div class="kpi">
+              <h3>Available Products</h3>
+              <p id="available-products">0</p>
+            </div>
+            <div class="kpi">
+              <h3>Out of Stock Products</h3>
+              <p id="out-of-stock-products">0</p>
+            </div>
+            <div class="kpi">
+              <h3>Total Revenue</h3>
+              <p id="total-revenue">$0.00</p>
+            </div>
+          </div>
+          <!-- Table Of Products -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="th-image">Product Image</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Menu</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body">
+              <!-- Products will be displayed here -->
+            </tbody>
+          </table>
+        </section>
+      </main>
+      <!-- Product Form Overlay -->
+      <div class="dialog-overlay" id="product-form-overlay">
+        <div class="dialog-container">
+          <div class="dialog-header">
+            <h2 id="product-form-title">Add Product</h2>
+            <button class="btn-close" id="product-form-close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <form
+            class="product-form"
+            id="product-form"
+            enctype="multipart/form-data"
+          >
+            <div id="error-box"></div>
+            <div class="input-box">
+              <label for="product-name" class="form-label">Product Name</label>
+              <input
+                class="form-input"
+                type="text"
+                id="product-name"
+                name="product-name"
+                required
+              />
+            </div>
+            <div class="input-box">
+              <label for="product-price" class="form-label"
+                >Product Price</label
+              >
+              <input
+                class="form-input"
+                type="number"
+                id="product-price"
+                name="product-price"
+                required
+              />
+            </div>
+            <div class="input-box">
+              <label for="product-image" class="form-label"
+                >Product Image</label
+              >
+              <input
+                class="form-input"
+                type="file"
+                id="product-image"
+                name="product-image"
+                required
+              />
+              <img
+                id="image-preview"
+                src=""
+                alt="Preview"
+                style="
+                  display: none;
+                  width: 100px;
+                  height: 100px;
+                  object-fit: cover;
+                  margin-top: 10px;
+                  border-radius: 8px;
+                "
+              />
+            </div>
+            <div class="input-box">
+              <label for="product-menu" class="form-label"
+                >Product Category</label
+              >
+              <select
+                class="form-input"
+                id="product-menu"
+                name="product-menu"
+                required
+              >
+                <option value="">Select Menu</option>
+                <!-- Menus will be displayed here -->
+              </select>
+            </div>
+            <div class="input-box">
+              <label for="product-description" class="form-label"
+                >Product Description</label
+              >
+              <textarea
+                class="form-input"
+                id="product-description"
+                name="product-description"
+                required
+              ></textarea>
+            </div>
+            <div class="input-box">
+              <label for="product-stock" class="form-label"
+                >Product Stock</label
+              >
+              <input
+                class="form-input"
+                type="number"
+                id="product-stock"
+                name="product-stock"
+                required
+              />
+            </div>
+            <button type="submit" class="btn-submit" id="btn-submit-product">Add Product</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/js/utils/auth.js"></script>
+    <script type="module" src="/js/admin/products.js"></script>
+  </body>
+</html>

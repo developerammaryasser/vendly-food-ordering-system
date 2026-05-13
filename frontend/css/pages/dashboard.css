@@ -1,0 +1,235 @@
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100vh;
+}
+
+.template-area {
+  display: grid;
+  grid-template-areas: "sidebar main-content";
+  grid-template-columns: 15% 85%;
+  height: 100vh;
+}
+.sidebar {
+  grid-area: sidebar;
+  padding: 1rem 0.5rem;
+}
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.sidebar nav ul {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  list-style: none;
+}
+.sidebar nav ul li {
+  margin-bottom: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--bg-color);
+  transition: all 0.1s ease-in-out;
+}
+.sidebar nav ul li.active,
+.sidebar nav ul li:hover {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+.sidebar nav ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: var(--font-size-sm);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.account {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+.account-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.account-details .account-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.account-details .account-info .account-name {
+  width: 100%;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.account-details .account-info .account-name i {
+  cursor: pointer;
+}
+.account-details .account-info .account-email {
+  font-size: 0.8rem;
+  color: #757575;
+}
+.main-content {
+  grid-area: main-content;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+.main-content section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.section-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.dashboard-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* KPI Cards Modern Styling */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.kpi {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.kpi:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.kpi-icon {
+  width: 50px;
+  height: 50px;
+  background: #fff3eb;
+  color: var(--primary-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.kpi-data h3 {
+  font-size: 0.85rem;
+  color: #757575;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.kpi-data .value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--font-color);
+}
+
+/* Charts Layout */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.chart-container {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 400px; /* Fixed height to prevent chart from growing infinitely */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container canvas {
+  flex: 1;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-container h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Activity Table Section */
+.table-card {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.table-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: #fff8e1;
+  color: #ffa000;
+}
+.status-completed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.status-cancelled {
+  background: #ffebee;
+  color: #c62828;
+}
+@media (max-width: 1200px) {
+  .kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .kpis {
+    grid-template-columns: 1fr;
+  }
+}

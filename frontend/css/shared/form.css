@@ -1,0 +1,31 @@
+.input-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
+.form-label {
+  font-weight: medium;
+}
+.form-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+.btn-submit {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+.error-message {
+  color: var(--red-color);
+  padding: 8px 16px;
+  background-color: #f8d7da;
+  border: 1px solid var(--red-color);
+  border-radius: 4px;
+}

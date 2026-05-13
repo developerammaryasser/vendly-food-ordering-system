@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pages/dashboard.css" />
+    <!-- Font Awesome Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="template-area">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li class="active">
+              <a href="/orders.html">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Orders</span>
+              </a>
+            </li>
+            <li class="">
+              <a href="/delivery.html">
+                <i class="fa-solid fa-motorcycle"></i>
+                <span>Delivery</span>
+              </a>
+            </li>
+          </ul>
+          <div class="account">
+            <div class="account-details">
+              <i class="fa-solid fa-user"></i>
+              <div class="account-info">
+                <h4 class="account-name">
+                  Ammar Yasser
+                  <button class="btn-logout" id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </button>
+                </h4>
+                <p class="account-email">ammaryasser.online@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </aside>
+      <!-- Main Content -->
+      <main class="main-content">
+        <section>
+          <h2>Orders</h2>
+          <!-- KPIS -->
+          <div class="kpis">
+            <div class="kpi">
+              <h3>Total Orders</h3>
+              <p>0</p>
+            </div>
+            <div class="kpi">
+              <h3>Pending Orders</h3>
+              <p>0</p>
+            </div>
+            <div class="kpi">
+              <h3>Completed Orders</h3>
+              <p>0</p>
+            </div>
+            <div class="kpi">
+              <h3>Cancelled Orders</h3>
+              <p>0</p>
+            </div>
+            <div class="kpi">
+              <h3>Total Revenue</h3>
+              <p>$0.00</p>
+            </div>
+            <div class="kpi">
+              <h3>Average Order Value</h3>
+              <p>$0.00</p>
+            </div>
+          </div>
+          <!-- Table Of Orders -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>$100.00</td>
+                <td>Pending</td>
+                <td>$100.00</td>
+                <td>
+                  <button class="btn-view">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <button class="btn-edit">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="btn-delete">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script src="./js/utils/logout.js"></script>
+    <script type="module" src="./js/utils/auth.js"></script>
+  </body>
+</html>

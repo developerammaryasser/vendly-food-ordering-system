@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/pages/login.css" />
+    <link rel="stylesheet" href="./css/shared/form.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <main>
+      <div class="login-box">
+        <a href="/" class="back-link"
+          ><i class="fa-solid fa-arrow-left"></i> Back to home</a
+        >
+        <form id="login-form" novalidate>
+          <h2>Welcome back</h2>
+          <p>Login to your account</p>
+          <div id="error-message"></div>
+          <div class="input-box">
+            <label for="email" class="form-label">Email *</label>
+            <input
+              class="form-input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="input-box">
+            <label for="password" class="form-label">Password *</label>
+            <input
+              class="form-input"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              minlength="6"
+            />
+          </div>
+          <button type="submit" class="btn-submit">Login</button>
+          <p class="text-center">
+            Don't have an account?
+            <a href="/register.html" class="link-text">Register</a>
+          </p>
+        </form>
+      </div>
+    </main>
+    <script src="./js/main.js"></script>
+    <script src="./js/pages/login.js" type="module"></script>
+  </body>
+</html>

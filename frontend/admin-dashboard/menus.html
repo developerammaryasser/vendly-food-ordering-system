@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menus - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/pages/dashboard.css" />
+    <link rel="stylesheet" href="/css/shared/form.css" />
+    <link rel="stylesheet" href="/css/shared/dialog.css" />
+    <link rel="stylesheet" href="/css/pages/menus.css" />
+
+    <!-- Font Awesome Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="template-area">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav>
+          <ul>
+            <li>
+              <a href="./index.html">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="./menus.html">
+                <i class="fa-solid fa-book"></i>
+                <span>Menus</span>
+              </a>
+            </li>
+            <li>
+              <a href="./products.html">
+                <i class="fa-solid fa-burger"></i>
+                <span>Products</span>
+              </a>
+            </li>
+            <li>
+              <a href="./orders.html">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Orders</span>
+              </a>
+            </li>
+            <li>
+              <a href="./users.html">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+              </a>
+            </li>
+          </ul>
+          <div class="account">
+            <div class="account-details">
+              <i class="fa-solid fa-user"></i>
+              <div class="account-info">
+                <h4 class="account-name">
+                  Ammar Yasser
+                  <button class="btn-logout" id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </button>
+                </h4>
+                <p class="account-email">ammaryasser.online@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </aside>
+      <!-- Main Content -->
+      <main class="main-content">
+        <section>
+          <div class="section-header">
+            <h2>Menus</h2>
+            <!-- Add Menu Button -->
+            <div>
+              <button class="btn-primary" id="btn-add-menu">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add Menu</span>
+              </button>
+            </div>
+          </div>
+          <!-- KPIS -->
+          <div class="kpis">
+            <div class="kpi">
+              <h3>Total Menus</h3>
+              <p id="total-menus">0</p>
+            </div>
+            <div class="kpi">
+              <h3>Active Menus</h3>
+              <p id="active-menus">0</p>
+            </div>
+            <div class="kpi">
+              <h3>Total Items</h3>
+              <p id="total-items">0</p>
+            </div>
+          </div>
+          <!-- Table Of Menus -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Items Number</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="menus-table-body">
+              <!-- Menus will be loaded here -->
+            </tbody>
+          </table>
+        </section>
+      </main>
+
+      <!-- Menu Form Overlay -->
+      <div class="dialog-overlay" id="menu-form-overlay">
+        <div class="dialog-container">
+          <div class="dialog-header">
+            <h2>Add Menu</h2>
+            <button class="btn-close" id="menu-form-close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <form class="menu-form" id="menu-form">
+            <div id="error-box"></div>
+            <div id="menus-input-container" class="menus-input-container">
+              <div class="menu-input-row">
+                <div class="input-box">
+                  <label class="form-label">Menu Name</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    name="menu-names[]"
+                    placeholder="e.g. Breakfast"
+                    required
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="btn-remove-row"
+                  style="display: none"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-secondary" id="add-menu-row">
+              <i class="fa-solid fa-plus"></i>
+              <span>Add another menu</span>
+            </button>
+
+            <button type="submit" class="btn-submit">Save All Menus</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/js/utils/auth.js"></script>
+    <script type="module" src="/js/admin/menus.js"></script>
+  </body>
+</html>

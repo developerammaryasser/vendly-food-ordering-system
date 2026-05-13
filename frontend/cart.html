@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Review your order and complete checkout on Vendly." />
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/pages/cart.css" />
+    <link rel="stylesheet" href="./css/shared/form.css" />
+    <title>Checkout — Vendly</title>
+  </head>
+  <body>
+    <div class="checkout-page">
+      <!-- Back to Menu -->
+      <a href="./index.html" class="cart-back-link" id="back-to-menu">
+        <i class="fa-solid fa-arrow-left"></i> Back to Menu
+      </a>
+
+      <h1 class="checkout-page-title">Checkout</h1>
+
+      <!-- Two-column layout -->
+      <div class="checkout-layout">
+
+        <!-- LEFT COLUMN: Contact + Order Items -->
+        <div class="checkout-left">
+
+          <!-- Order Type: Takeaway Only -->
+          <div class="checkout-card">
+            <div class="checkout-card-header">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span>Takeaway — From Restaurant</span>
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="checkout-card" id="contact-card">
+            <h2 class="checkout-section-title">Contact person</h2>
+            <div id="error-message"></div>
+            <div class="checkout-fields-grid">
+              <div class="cart-field">
+                <label for="customer-name">Your name</label>
+                <input
+                  type="text"
+                  id="customer-name"
+                  placeholder="Type here"
+                  autocomplete="name"
+                />
+              </div>
+              <div class="cart-field">
+                <label for="customer-phone">Phone</label>
+                <input
+                  type="tel"
+                  id="customer-phone"
+                  placeholder="+20"
+                  autocomplete="tel"
+                />
+              </div>
+              <div class="cart-field full-width">
+                <label for="customer-email">Email</label>
+                <input
+                  type="email"
+                  id="customer-email"
+                  placeholder="Type here"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="cart-field full-width">
+                <label for="order-notes">Notes (optional)</label>
+                <textarea
+                  id="order-notes"
+                  placeholder="Any special requests?"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Your Items -->
+          <div class="checkout-card" id="items-card">
+            <div class="order-items-header">
+              <h2 class="checkout-section-title" style="margin:0;">Your items</h2>
+              <button class="btn-clear-cart" id="btn-clear-cart" title="Clear all items">
+                <i class="fa-solid fa-trash-can"></i> Clear
+              </button>
+            </div>
+
+            <!-- Items rendered here by JS -->
+            <div id="order-items-body">
+              <!-- Loading state -->
+              <div class="empty-cart" id="loading-state">
+                <div class="empty-cart-icon">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                </div>
+                <h3>Loading your cart…</h3>
+              </div>
+            </div>
+
+            <!-- Edit Order link -->
+            <a href="./index.html" class="btn-edit-order" id="btn-edit-order">
+              <i class="fa-solid fa-pencil"></i> Edit order
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Order Summary + Place Order -->
+        <div class="checkout-right">
+          <div class="checkout-summary-card">
+            <h2 class="checkout-section-title">Order total</h2>
+
+            <div class="summary-rows">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal-value">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Tax (10%)</span>
+                <span id="tax-value">$0.00</span>
+              </div>
+              <div class="summary-row discount-row">
+                <span>Discount</span>
+                <span id="discount-value">$0.00</span>
+              </div>
+            </div>
+
+            <hr class="summary-divider" />
+
+            <div class="summary-grand-total">
+              <span>Total:</span>
+              <span id="grand-total-value">$0.00</span>
+            </div>
+
+            <!-- Place Order Button -->
+            <button class="btn-checkout" id="btn-checkout">
+              <i class="fa-solid fa-check"></i> Place Order
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="cart-toast" id="cart-toast"></div>
+
+    <script src="./js/main.js"></script>
+    <script type="module" src="./js/pages/cart.js"></script>
+  </body>
+</html>

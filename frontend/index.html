@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Font Awesome Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Food Ordering System</title>
+  </head>
+  <body class="container">
+    <!-- Header Started  -->
+    <header class="fixed-header">
+      <!-- Header Top Wrapper -->
+      <div class="header-top">
+        <h2>Menu</h2>
+        <!-- Search Input -->
+        <div class="search-wrapper">
+          <input type="search" placeholder="Search" class="search-input" />
+          <i class="fa-solid fa-search search-icon"></i>
+        </div>
+        <!-- Buttons Group -->
+        <div class="header-buttons">
+          <!-- Login Button -->
+          <div>
+            <a href="./login.html" class="link-icon" title="Login">
+              <i class="fa-solid fa-user"></i>
+            </a>
+          </div>
+          <!-- Cart Button -->
+          <div>
+            <a href="./cart.html" class="btn-cart" title="Cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <!-- Cart Count -->
+              <span class="cart-count" id="cart-counter">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Header Bottom (Menus Navigation) -->
+      <div class="categories-nav">
+        <!-- Menus List -->
+        <ul id="menus-body">
+          <!-- Append Menus -->
+           <li>
+            <button class="active" id="menu-btn" data-id="all">All</button>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!-- Header Ended -->
+    <!-- Main Wrapper Started -->
+    <main>
+      <section id="products">
+        <!-- Products Grid -->
+        <div id="products-body" class="products-grid">
+          <!-- Append Products -->
+        </div>
+      </section>
+    </main>
+    <!-- Main Wrapper Ended -->
+    <script src="./js/main.js"></script>
+    <script type="module" src="./js/pages/home.js"></script>
+  </body>
+</html>
