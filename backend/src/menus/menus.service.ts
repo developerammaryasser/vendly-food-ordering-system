@@ -28,7 +28,9 @@ export class MenusService {
   }
 
   async findAll() {
-    return await this.menuRepository.find();
+    return await this.menuRepository.find({
+      relations: { products: true },
+    });
   }
 
   async findOne(id: number) {

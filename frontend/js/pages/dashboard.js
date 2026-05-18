@@ -1,4 +1,4 @@
-import { getAllOrders, updateOrderStatus } from "../api/dashboard/order.js";
+import { getUserOrders, updateOrderStatus } from "../api/dashboard/order.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Document Elements
@@ -8,10 +8,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   const cancelledOrdersKpi = document.getElementById("cancelled-orders-kpi");
   const ordersTableBody = document.getElementById("orders-table-body");
 
+  // Get current user from local storage
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  
+  if (!currentUser || !currentUser.email) {
+    ordersTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">User not found. Please log in again.</td></tr>`;
+    return;
+  }
+
   const loadOrders = async () => {
     try {
-      // Fetch Orders
-      const orders = await getAllOrders();
+      // Fetch User's Orders
+      const orders = await getUserOrders();
 
       // Calculate KPIs
       const totalOrders = orders.length;
@@ -20,6 +28,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       let cancelledOrders = 0;
 
       ordersTableBody.innerHTML = "";
+
+      if (orders.length === 0) {
+        ordersTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center;">You have no orders yet.</td></tr>`;
+      }
 
       orders.forEach((order) => {
         // Update KPIs
@@ -41,10 +53,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         row.innerHTML = `
           <td>${order.id}</td>
-          <td>
-            <strong>${order.customer?.name || "Unknown"}</strong><br>
-            <small style="color: #666;">${order.customer?.phone || ""}</small>
-          </td>
           <td>${itemsCount} item(s)</td>
           <td><span class="status-badge status-${order.status}">${statusCapitalized}</span></td>
           <td>$${Number(order.totalPrice).toFixed(2)}</td>
@@ -52,10 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             ${
               order.status === "pending"
                 ? `
-              <button class="btn-icon complete-btn" data-id="${order.id}" title="Complete">
-                <i class="fa-solid fa-check" style="color: green;"></i>
-              </button>
-              <button class="btn-icon cancel-btn" data-id="${order.id}" title="Cancel">
+              <button class="btn-icon cancel-btn" data-id="${order.id}" title="Cancel Order">
                 <i class="fa-solid fa-xmark" style="color: red;"></i>
               </button>
             `
@@ -67,33 +72,31 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       // Update KPI UI
-      totalOrdersKpi.textContent = totalOrders;
-      pendingOrdersKpi.textContent = pendingOrders;
-      completedOrdersKpi.textContent = completedOrders;
-      cancelledOrdersKpi.textContent = cancelledOrders;
+      if (totalOrdersKpi) totalOrdersKpi.textContent = totalOrders;
+      if (pendingOrdersKpi) pendingOrdersKpi.textContent = pendingOrders;
+      if (completedOrdersKpi) completedOrdersKpi.textContent = completedOrders;
+      if (cancelledOrdersKpi) cancelledOrdersKpi.textContent = cancelledOrders;
 
-      // Add event listeners to the new buttons
-      const completeButtons = document.querySelectorAll(".complete-btn");
+      // Add event listeners to the cancel buttons
       const cancelButtons = document.querySelectorAll(".cancel-btn");
-
-      completeButtons.forEach((btn) => {
-        btn.addEventListener("click", async (e) => {
-          const id = e.currentTarget.getAttribute("data-id");
-          await updateOrderStatus(id, "completed");
-          loadOrders(); // Reload the data
-        });
-      });
 
       cancelButtons.forEach((btn) => {
         btn.addEventListener("click", async (e) => {
-          const id = e.currentTarget.getAttribute("data-id");
-          await updateOrderStatus(id, "cancelled");
-          loadOrders(); // Reload the data
+          if (confirm("Are you sure you want to cancel this order?")) {
+            const id = e.currentTarget.getAttribute("data-id");
+            try {
+               await updateOrderStatus(id, "cancelled");
+               loadOrders(); // Reload the data
+            } catch (error) {
+               alert("Failed to cancel order.");
+               console.error(error);
+            }
+          }
         });
       });
     } catch (error) {
       console.error("Failed to fetch orders:", error);
-      ordersTableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">Failed to load orders.</td></tr>`;
+      ordersTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Failed to load orders.</td></tr>`;
     }
   };
 

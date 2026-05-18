@@ -1,7 +1,8 @@
+import { getAllOrders, updateOrderStatus } from '../api/dashboard/order.js';
+import { getAllProducts } from '../api/dashboard/product.js';
+import { getAllMenus } from '../api/dashboard/menu.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
-    // API Base URL
-    const API_URL = 'http://localhost:3000'; // Adjust if needed
-    
     // Elements
     const kpiRevenue = document.querySelector('#kpi-revenue .value');
     const kpiOrders = document.querySelector('#kpi-orders .value');
@@ -31,27 +32,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         let orders = [], products = [], menus = [];
         try {
             const [ordersRes, productsRes, menusRes] = await Promise.all([
-                fetch(`${API_URL}/api/orders`),
-                fetch(`${API_URL}/api/products`),
-                fetch(`${API_URL}/api/menus`)
+                getAllOrders(),
+                getAllProducts(),
+                getAllMenus()
             ]);
-            orders = await ordersRes.json();
-            products = await productsRes.json();
-            menus = await menusRes.json();
+            orders = ordersRes;
+            products = productsRes;
+            menus = menusRes;
         } catch (e) {
-            console.warn("Could not fetch real data, using dummy data instead.");
-        }
-
-        // Fallback to Dummy Data if empty (for demonstration)
-        if (orders.length === 0) {
-            orders = [
-                { id: 101, customer: { name: 'Ahmed Ali', email: 'ahmed@example.com' }, status: 'completed', totalPrice: 150.50, createdAt: new Date() },
-                { id: 102, customer: { name: 'Sara Mohamed', email: 'sara@example.com' }, status: 'pending', totalPrice: 85.00, createdAt: new Date() },
-                { id: 103, customer: { name: 'John Doe', email: 'john@example.com' }, status: 'completed', totalPrice: 210.00, createdAt: new Date() },
-                { id: 104, customer: { name: 'Mona Hassan', email: 'mona@example.com' }, status: 'cancelled', totalPrice: 45.00, createdAt: new Date() },
-                { id: 105, customer: { name: 'Omar Khaled', email: 'omar@example.com' }, status: 'pending', totalPrice: 120.00, createdAt: new Date() },
-                { id: 106, customer: { name: 'Laila Ibrahem', email: 'laila@example.com' }, status: 'completed', totalPrice: 320.00, createdAt: new Date() }
-            ];
         }
         if (products.length === 0) products = new Array(12).fill({});
         if (menus.length === 0) menus = new Array(4).fill({});
@@ -146,17 +134,46 @@ document.addEventListener('DOMContentLoaded', async () => {
             <tr>
                 <td>#${order.id}</td>
                 <td>
-                    <div style="font-weight: 500;">${order.customer.name}</div>
-                    <div style="font-size: 0.75rem; color: #757575;">${order.customer.email}</div>
+                    <div style="font-weight: 500;">${order.customer?.name || 'Unknown'}</div>
+                    <div style="font-size: 0.75rem; color: #757575;">${order.customer?.email || ''}</div>
                 </td>
                 <td><span class="status-badge status-${order.status}">${order.status}</span></td>
                 <td style="font-weight: 600;">$${Number(order.totalPrice).toFixed(2)}</td>
-                <td>
-                    <button class="btn-view" onclick="window.location.href='./orders.html'">
-                        <i class="fa-solid fa-eye"></i>
-                    </button>
+                <td class="actions">
+                    ${
+                      order.status === "pending"
+                        ? `
+                      <button class="btn-icon complete-btn" data-id="${order.id}" title="Complete">
+                        <i class="fa-solid fa-check" style="color: green;"></i>
+                      </button>
+                      <button class="btn-icon cancel-btn" data-id="${order.id}" title="Cancel">
+                        <i class="fa-solid fa-xmark" style="color: red;"></i>
+                      </button>
+                    `
+                        : ""
+                    }
                 </td>
             </tr>
         `).join('');
+
+        // Add event listeners to the new buttons
+        const completeButtons = document.querySelectorAll(".complete-btn");
+        const cancelButtons = document.querySelectorAll(".cancel-btn");
+
+        completeButtons.forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+                const id = e.currentTarget.getAttribute("data-id");
+                await updateOrderStatus(id, "completed");
+                window.location.reload();
+            });
+        });
+
+        cancelButtons.forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+                const id = e.currentTarget.getAttribute("data-id");
+                await updateOrderStatus(id, "cancelled");
+                window.location.reload();
+            });
+        });
     }
 });

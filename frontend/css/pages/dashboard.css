@@ -1,18 +1,27 @@
 body {
   margin: 0 !important;
   padding: 0 !important;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .template-area {
   display: grid;
   grid-template-areas: "sidebar main-content";
   grid-template-columns: 15% 85%;
-  height: 100vh;
+  min-height: 100vh;
 }
 .sidebar {
   grid-area: sidebar;
   padding: 1rem 0.5rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
 }
 .sidebar nav {
   display: flex;
@@ -54,34 +63,63 @@ body {
   justify-content: space-between;
   border: 1px solid var(--border-color);
   border-radius: 6px;
+  width: 100%;
+  margin-top: auto;
 }
 .account-details {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
+  width: 100%;
 }
 .account-details .account-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: 1;
+  min-width: 0;
 }
 .account-details .account-info .account-name {
   width: 100%;
-  font-size: var(--font-size-md);
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
   color: var(--text-color);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 4px;
 }
 .account-details .account-info .account-name i {
   cursor: pointer;
 }
 .account-details .account-info .account-email {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   color: #757575;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.btn-logout {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #757575;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.btn-logout:hover {
+  color: var(--red-color, #dc3545);
+  transform: scale(1.1);
+}
+.btn-logout i {
+  color: inherit !important;
+  font-size: 1.1rem;
 }
 .main-content {
   grid-area: main-content;

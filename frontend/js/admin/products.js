@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     outOfStockProducts.textContent = products.filter(
       (p) => p.stock === 0,
     ).length;
-    totalRevenue.textContent = `$${products.reduce((acc, p) => acc + Number(p.price), 0)}`;
+    totalRevenue.textContent = `$${products.reduce((acc, p) => acc + p.price * p.stock, 0).toFixed(2)}`;
   }
 
   renderProducts();

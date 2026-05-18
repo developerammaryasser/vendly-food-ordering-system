@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     let totalItemsCount = 0;
 
     menus.forEach((menu) => {
-      totalItemsCount += menu.itemsCount || 0;
+      totalItemsCount += menu.products.length;
       const row = document.createElement("tr");
       row.innerHTML = `
                 <td>${menu.name}</td>
-                <td>${menu.itemsCount || 0}</td>
+                <td>${menu.products.length}</td>
                 <td>
                     <button class="btn-delete" data-id="${menu.id}">
                         <i class="fa-solid fa-trash"></i>
@@ -90,9 +90,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             </button>
         `;
     menusInputContainer.appendChild(row);
+  });
 
-    // Show all remove buttons if more than one row
-    updateRemoveButtonsVisibility();
+  // Remove menu name row in form
+  menusInputContainer.addEventListener("click", (e) => {
+    const removeBtn = e.target.closest(".btn-remove-row");
+    if (removeBtn) {
+      removeBtn.closest(".menu-input-row").remove();
+    }
   });
 
   // Delete functionality

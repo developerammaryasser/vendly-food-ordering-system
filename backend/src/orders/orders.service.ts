@@ -45,6 +45,11 @@ export class OrdersService {
     return await this.orderRepository.find({ relations: ['orderItems'] });
   }
 
+  async findUserOrders(email: string) {
+    const allOrders = await this.findAll();
+    return allOrders.filter(order => order.customer?.email === email);
+  }
+
   async findOne(id: number) {
     const order = await this.orderRepository.findOne({
       where: { id },
@@ -82,6 +87,44 @@ export class OrdersService {
   //   order.totalPrice = totalPrice ?? order.totalPrice;
   //   return this.orderRepository.save(order);
   // }
+
+  async updateStatus(id: number, status: string) {
+    const order = await this.orderRepository.findOne({
+      where: { id },
+      relations: ['orderItems', 'orderItems.product'],
+    });
+
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
+
+    const oldStatus = order.status;
+
+    if (oldStatus !== status) {
+      // If transitioning to completed status, decrease product stock
+      if (status === 'completed') {
+        for (const item of order.orderItems) {
+          if (item.product) {
+            const newStock = item.product.stock - item.quantity;
+            item.product.stock = newStock < 0 ? 0 : newStock;
+            await this.productRepository.save(item.product);
+          }
+        }
+      }
+      // If transitioning from completed status to another status, restore product stock
+      else if (oldStatus === 'completed') {
+        for (const item of order.orderItems) {
+          if (item.product) {
+            item.product.stock += item.quantity;
+            await this.productRepository.save(item.product);
+          }
+        }
+      }
+    }
+
+    order.status = status;
+    return this.orderRepository.save(order);
+  }
 
   async remove(id: number) {
     const order = await this.findOne(id);
